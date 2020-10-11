@@ -1,0 +1,76 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>
+        {% block title %} {{title}} {% endblock %}
+    </title>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1, shrink-to-fit=no" />
+    <meta name="generator" content="vscode">
+    <meta http-equiv="Cache-Control" content="no-transform">
+    <meta http-equiv="Cache-Control" content="no-siteapp">
+    <meta name="description" content="lambert 的个人技术学习网站，总结了前端、python、django、linux等技术学习内容">
+    <meta property="author" content="lambert">
+    <meta property="keywords" content="javascript,html,css,vue,python,django,ubuntu,linux">
+    <meta http-equiv="windows-target" content="_top">
+    <meta http-equiv="page-enter" content="revealtrans(duration=3, transition=21)">
+    <link rel="canonical" href="https://25years.xyz/">
+
+    {% block header %} {% endblock %}
+
+    <link rel="stylesheet" href="{% static 'css/zui.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/zui-theme.css' %}">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link rel="stylesheet" href="{% static 'vendor/Live2D/live2d/css/live2d.css' %}">
+
+    {% block CustomCSS %} {% endblock %}
+</head>
+
+<body>
+    <section class="site-content">
+
+    {% block nav %} {% endblock %}
+
+        {% block content %} {% endblock %}
+
+        {% block footer %} {% endblock %}
+    </section>
+
+    <div id="landlord">
+        <div class="message" style="opacity:0"></div>
+        <canvas id="live2d" width="230" height="260" class="live2d"></canvas>
+        <div class="hide-button">隐藏</div>
+    </div>
+
+    <script>
+        var message_Path = "{% static 'vendor/Live2D/live2d/' %}";
+        var home_Path = 'https://www.25years.xyz/';
+    </script>
+
+
+    <script src="{% static 'js/lib/jquery/jquery.js' %}"></script>
+    <script src="{% static 'js/underscore.js' %}"></script>
+    <script src="{% static 'js/backbone.js' %}"></script>
+
+    {% if not request.user.is_authenticated %}
+     <script src="{% static 'js/backbone_plugin/backbone.localStorage.js' %}"></script>
+    {% endif %}
+    
+    <!-- <script src="{% static 'js/backbone-validation.js' %}"></script> -->
+
+    <script src="{% static 'js/zui.js' %}"></script>
+    <script src="{% static 'vendor/Live2D/live2d/js/live2d.js' %}"></script>
+    <script src="{% static 'vendor/Live2D/live2d/js/message.js' %}"></script>
+
+    <script src="{% static 'js/utils.js' %}"></script>
+    <script>
+        loadlive2d("live2d", "{% static 'vendor/Live2D/live2d/model/tia/model.json' %}");
+    </script>
+    {% block CustomJS %} {% endblock %}
+
+</body>
+
+</html>

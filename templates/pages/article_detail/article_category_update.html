@@ -1,0 +1,22 @@
+
+{% load mptt_tags %}
+
+<ul class="tree tree-lines" data-animate="true"  data-ride="tree" id="CategoryTree">
+    {% recursetree nodes %}
+        <li>
+            <div class="checkbox-primary">
+                    <input type="checkbox" id="id_category{{node.id}}" name="category" value="{{node.id}}">
+
+                    <label for="id_category{{node.id}}">
+                        {{ node.name }}
+                    </label>
+            </div>
+
+            {% if not node.is_leaf_node %}
+                <ul >
+                    {{ children }}
+                </ul>
+            {% endif %}
+        </li>
+    {% endrecursetree %}
+</ul>

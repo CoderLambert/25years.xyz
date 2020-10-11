@@ -1,0 +1,67 @@
+.nav-operation {
+  float: right;
+}
+.nav-operation #change_language {
+  font-size: 13px;
+}
+.nav-operation #change_language:hover {
+  color: skyblue;
+}
+.file-info-box {
+  display: block;
+  min-height: 600px;
+}
+.file-searchbox {
+  margin-bottom: 20px;
+}
+.btn-round {
+  border-radius: 8px;
+}
+.tree-menu li li span {
+  padding-left: 28px;
+  border-top-color: transparent;
+  border-bottom-color: transparent;
+}
+.tree-menu li > span {
+  display: block;
+  padding: 8px;
+  margin-bottom: -1px;
+  color: #353535;
+  cursor: pointer;
+  -webkit-transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1);
+  -o-transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1);
+  transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1);
+  -webkit-transition-property: color, background, opacity, left, top, right, bottom, -webkit-transform;
+  -o-transition-property: color, background, opacity, left, top, right, bottom, -o-transform;
+  transition-property: color, background, opacity, left, top, right, bottom, -webkit-transform;
+  transition-property: color,background,transform,opacity,left,top,right,bottom;
+  transition-property: color, background, transform, opacity, left, top, right, bottom, -webkit-transform, -o-transform;
+}
+.tree-menu li > span > .icon {
+  display: inline-block;
+  width: 20px;
+  color: inherit;
+  text-align: left;
+  opacity: 0.6;
+}
+.tree-menu li:hover,
+.tree-menu .active {
+  background: #38b03f;
+}
+.tree-menu li:hover span,
+.tree-menu .active span {
+  color: #fff;
+}
+.bootbox.modal .modal-dialog {
+  width: 400px;
+}
+.upload-tag-box {
+  display: flex;
+}
+.upload-tag-new {
+  margin: auto 8px;
+}
+.upload-tag-new:hover {
+  color: skyblue;
+  cursor: pointer;
+}

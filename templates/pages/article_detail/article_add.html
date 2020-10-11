@@ -1,0 +1,251 @@
+<!--
+@author: Lambert
+@time: 2020/06/02
+@file: home.html
+@contact: l156486648@163.com
+@site: blog.25years.xyz
+-->
+{% extends 'base/base.html' %}
+{% load static %}
+{% block CustomCSS %}
+<link rel="stylesheet" href="{% static 'js/lib/chosen/chosen.css' %}" />
+
+{% if editor == 'md' %}
+<link rel="stylesheet" href="{% static 'vendor/bower_components/editor_md/css/editormd.css' %}" />
+{% endif %}
+
+{% endblock %}
+
+{% block nav %}
+{% include 'component/nav.html' %}
+{% endblock %}
+
+
+{% block content %}
+<div class="container-fluid">
+    <form id="addArticle" method="POST" action="/add">
+        {% csrf_token %}
+        <div class="row main">
+            <div class="col-lg-9 col-md-12 col-sm-12 col-xs-12 main-content">
+                {% if form.errors %}
+
+                <div class="alert alert-warning alert-dismissable">
+                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                    <h4>请更正下方提示错误!</h4>
+
+                    {{ form.errors }}
+                </div>
+
+                {% endif %}
+
+                <h1>
+                    {{ form.title }}
+                </h1>
+                <section style="margin-bottom:5px">
+                    {{form.link_address}}
+                </section>
+
+
+                <input type="hidden" id="id_content_add" name="content" class="form-control" required>
+
+                {% if editor == "md" %}
+                <div id="test-editormd" style="z-index: 999;">
+                </div>
+                {% else %}
+                <textarea id="id_kindeditor" class="form-control kindeditor" style="height:650px;font-size: 20px;">
+                    </textarea>
+                {% endif %}
+            </div>
+            <div class="col-lg-3 col-md-12 col-sm-12 col-xs-12 right-side">
+                <div class="row">
+                    <div class="col-lg-12 col-md-6 col-xs-12 ">
+                        <div class="panel">
+                            <div class="panel-heading article-setting">
+                                文章设置
+                            </div>
+                            <div class="panel-body">
+                                <div class="article-public-box">
+
+                                    <!-- 编辑器 -->
+                                    <div id="editor_box">
+
+
+                                        <label for="{{ form.editor.id_for_label }}">{{ form.editor.label }}</label>
+                                        <!-- {{ form.editor }}  -->
+
+                                        <select name="editor">
+
+                                            {% if editor == "md" %}
+                                            <option value="md" selected>
+                                                Markdown
+                                            </option>
+                                            {%else%}
+                                            <option value="md">
+                                                Markdown
+                                            </option>
+                                            {% endif %}
+
+                                            {% if editor == "rich" %}
+                                            <option value="rich" selected>
+                                                富文本
+                                            </option>
+                                            {%else%}
+                                            <option value="rich">
+                                                富文本
+                                            </option>
+                                            {% endif %}
+                                        </select>
+                                    </div>
+                                    <!-- 文章状态 -->
+                                    <div>
+                                        <label for="{{ form.state.id_for_label }}">{{ form.state.label }}</label>
+                                        {{ form.state }}
+                                    </div>
+                                    <!-- 访问权限 -->
+                                    <div>
+                                        <label
+                                            for="{{ form.access_permissions.id_for_label }}">{{ form.access_permissions.label }}</label>
+                                        {{ form.access_permissions }}
+                                    </div>
+
+                                    <!-- 是否原创 -->
+                                    <div>
+                                        <label for="{{ form.original.id_for_label }}">{{ form.original.label }}</label>
+                                        {{ form.original }}
+                                    </div>
+
+                                    <!-- 是否允许评论 -->
+                                    <div>
+                                        <div class="checkbox-primary">
+                                            {{ form.allow_comment }}
+                                            <label
+                                                for="{{ form.allow_comment.id_for_label }}">{{ form.allow_comment.label }}</label>
+                                        </div>
+                                    </div>
+
+                                    <div>
+                                        <div class="checkbox-primary">
+                                            {{ form.set_top }}
+                                            <label for="{{ form.set_top.id_for_label }}">{{ form.set_top.label }}</label>
+                                        </div>
+                                    </div>
+
+
+                                    <div class="article-submit">
+                                        <button class="btn btn-primary btn-sm" type="button" id="submit_article">
+                                            <i class="icon icon-file-text-o"></i>
+                                            发布文章
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-12 col-md-6 col-xs-12 ">
+                        <div class="panel">
+                            <div class="panel-heading article-category">
+                                个人分类
+                                <i class="icon icon-expand-alt icon-expand-size" id="category_toggle"></i>
+                            </div>
+                            <div class="panel-body">
+                                {{ form.category }}
+
+                                {% include 'pages/article_detail/article_add_category.html'%}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+
+</div>
+</div>
+</form>
+
+</div>
+{% endblock %}
+{% block CustomJS %}
+<script src="{% static 'js/lib/chosen/chosen.js' %}"></script>
+<script src="{% static 'js/utils.js' %}"></script>
+{% if editor == "md" %}
+
+<script src="{% static 'vendor/bower_components/editor_md/editormd.js' %}"></script>
+<script type="text/javascript">
+    var testEditor;
+    $(function () {
+        testEditor = editormd("test-editormd", {
+            width: "100%",
+            height: 640,
+            syncScrolling: "single",
+            path: "{% static 'vendor/bower_components/editor_md/lib/' %}",
+            imageUpload: true,
+            taskList: true,
+            imageFormats: ["jpg", "jpeg", "gif", "png", "bmp", "webp"],
+            imageUploadURL: "/uploadImg/",
+            crossDomainUpload: true,
+            // editorTheme: "xq-dark",//编辑器的主题颜色
+            // theme: "dark",//顶部的主题
+            // previewTheme: "dark"//显示的主题
+        });
+    });
+
+    function addArticel() {
+        var editor_content = null;
+        editor_content = testEditor.markdownTextarea.val();
+        $('#id_content_add').val(editor_content);
+        $('form').submit()
+    }
+
+    $('#submit_article').bind('click', addArticel);
+    // $('#CategoryTree').tree('toggle');
+
+</script>
+{% else %}
+<script src="{% static 'js/lib/kindeditor/kindeditor.min.js' %}"></script>
+<script>
+    var edior = KindEditor.create('textarea.kindeditor', {
+        allowFileManager: true,
+        bodyClass: 'article-content',
+        // filePostName: 'img_url',
+
+        uploadJson:'/uploadImg/', //处理图片路由
+    });
+
+    function addArticel() {
+        var kindeditor_content = null;
+        var article = null;
+        edior.sync();
+        kindeditor_content = $('#id_kindeditor').val();
+        $('#id_content_add').val(kindeditor_content);
+        $('form').submit()
+    }
+
+    $('#submit_article').bind('click', addArticel);
+
+</script>
+
+{% endif %}
+<script>
+
+(function ($) {
+    var $chosen = $('#id_category').parent('.panel-body').first();
+    var $category =  $('#id_category').chosen({
+        no_results_text: '没有找到',    // 当检索时没有找到匹配项时显示的提示文本
+        disable_search_threshold: 10, // 10 个以下的选择项则不显示检索框
+        search_contains: true,         // 从任意位置开始检索
+        width: $chosen.length > 0 ? $chosen.width()+'px' : 200+'px'
+    });
+    var init_checked_values = $category.val() || 0;
+    if ( init_checked_values ) {
+        for(var i = 0, length = init_checked_values.length; i<length;i++) {
+            $("#id_category"+i).prop({checked:false})
+        }
+    }
+    $('#category_toggle').click();
+})(jQuery);
+
+
+</script>
+{% endblock %}

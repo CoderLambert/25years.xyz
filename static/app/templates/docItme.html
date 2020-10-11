@@ -1,0 +1,21 @@
+<td> 
+    <a href=<%= model.file %> target="_blank" title=<%= locale.access_file%>> <%= model.name %> </a>
+</td>
+<td><%= model.tagname %></td>
+<td><%= model.username %></td>
+<td><%= model.create_time %></td>
+
+<td> 
+    <button class="btn btn-info btn-mini btn-round" type="button" id= 'detail_<%= model.id %>' data-toggle="tooltip" data-placement="left" data-tip-class="tooltip-info"  title=<%= model.desc %>>
+        <%=locale.operation_detail%>
+    </button>
+    <button class="btn btn-primary btn-mini  btn-round" type="button" id='file_edit_<%= model.id %>' data-id='<%= model.id %>' >
+        <%=locale.operation_edit%>
+
+    </button>
+
+    <button class="btn btn-danger  btn-mini btn-round" type="button" id= 'trash_<%= model.id %>' >
+        <%=locale.operation_move_to_trash%>
+    </button>
+
+</td>

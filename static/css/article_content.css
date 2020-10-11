@@ -1,0 +1,11 @@
+.article-public-box {
+  display: flex;
+  flex-direction: column;
+}
+.article-public-box select {
+  margin-left: 5px;
+  height: 1.8em;
+}
+.article-public-box .article-submit {
+  align-self: flex-end;
+}

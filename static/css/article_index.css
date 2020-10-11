@@ -1,0 +1,66 @@
+.article-title {
+  text-align: center;
+}
+.article-total {
+  color: #212121;
+}
+.article-total strong {
+  color: skyblue;
+  font-size: 1.5em;
+  display: inline-block;
+}
+.article-abstract {
+  font-size: 1.2em;
+  text-indent: 2em;
+  line-height: 1.8em;
+  background: #E8ECEF;
+  padding: 20px;
+  overflow: hidden;
+}
+.article-abstract.article-abstract::after {
+  content: '...';
+  display: inline;
+}
+.abstract-content::after {
+  content: '...';
+}
+.item-meta {
+  margin-left: 20px;
+}
+.item-meta .item-section {
+  margin: 2px 0;
+}
+.item {
+  -webkit-transition: all 1.5s ease-in-out 1s;
+  -o-transition: all 1.5s ease-in-out 1s;
+  -moz-transition: all 1.5s ease-in-out 1s;
+  transition: all 1.5s ease-in-out 1s;
+}
+.item .item-opration {
+  display: none;
+}
+.item:hover {
+  opacity: 1;
+  outline: 3px solid #6ab04c;
+  cursor: pointer;
+}
+.item:hover .item-opration {
+  display: block;
+}
+.item:hover .item-title .article-title {
+  color: #f0932b;
+}
+.item .item-title {
+  line-height: 2em;
+}
+.item .item-title a {
+  color: #212121;
+}
+.item .category-link:hover {
+  background: skyblue;
+  transform: scale(1.2);
+  cursor: pointer;
+}
+.article-public-box label {
+  width: 6em;
+}

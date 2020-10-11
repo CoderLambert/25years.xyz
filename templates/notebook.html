@@ -1,0 +1,102 @@
+<!--
+@author: Lambert
+@time: 2020/06/02
+@file: home.html
+@contact: l156486648@163.com
+@site: blog.25years.xyz
+-->
+{% extends 'base/base.html' %}
+{% load static %}
+
+{% block CustomCSS %}
+<link rel="stylesheet" href="{% static 'js/lib/calendar/zui.calendar.min.css' %}">
+<link href="{% static 'js/lib/datetimepicker/datetimepicker.css' %}" rel="stylesheet">
+{% endblock %}
+bsod/history.tar
+
+{% block nav %}
+{% include 'component/nav.html' %}
+{% endblock %}
+
+{% block content %}
+
+<div class="add-event-wrapper shrink">
+    <section class="add-event">
+
+        <div class="row">
+            <div class="col-md-12">
+                <h2 class="text-center text-green" id="event_box_title"> 记录新事件</h2>
+                <h2 class="text-center text-green hide" id="event_box_change_title"> 编辑</h2>
+
+            </div>
+            <div class="col-md-12">
+                <form id="add-info-box">
+                    {% csrf_token %}
+
+
+                    <div class="input-control has-label-left">
+                        <input id="event_title" name="event_title" type="text" class="form-control" placeholder=""
+                            data-toggle="tooltip" required>
+                        <label for="event_title" class="input-control-label-left text-right">事件名:</label>
+                    </div>
+
+
+                    <div class="input-control has-label-left">
+                        <!-- <input id="event_desc" name="event_desc" type="text" class="form-control" placeholder="" -->
+                            <!-- data-toggle="tooltip" required> -->
+
+                            <textarea id="event_desc" name="event_desc" type="text" class="form-control" placeholder=""
+                            data-toggle="tooltip" required></textarea>
+
+                        <label for="event_desc" class="input-control-label-left text-right">描述:</label>
+                    </div>
+
+
+                    <div class="input-control has-label-left">
+                        <input type="text" id="event_start" name="event_start" class="form-control form-datetime"
+                            placeholder="选择或者输入一个日期：yyyy-MM-dd" data-toggle="tooltip" readonly>
+                        <label for="event_start" class="input-control-label-left text-right">开始:</label>
+                    </div>
+
+                    <div class="input-control has-label-left">
+                        <input type="text" id="event_end" name="event_end" class="form-control form-datetime"
+                            placeholder="选择或者输入一个日期：yyyy-MM-dd" data-toggle="tooltip" readonly>
+                        <label for="event_end" class="input-control-label-left text-right">结束:</label>
+                    </div>
+
+                    <div class="input-control">
+                        <button class="form-control btn btn-primary" id="add_event" type="button">新增</button>
+                        <button class="form-control btn btn-primary hide" id="change_event" type="button">修改</button>
+
+                    </div>
+
+
+                    <div class="input-control">
+                        <button class="form-control btn btn-warning" type="reset" id="event_reset">重置</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+
+        <section class="add-flag">
+            <i class="icon icon-chevron-sign-left"></i>
+        </section>
+    </section>
+</div>
+
+
+<div class="container-fluid">
+    <div class="row main">
+        <div id="calendar" class="calendar"></div>
+    </div>
+</div>
+{% endblock %}
+
+{% block CustomJS %}
+<script src="{% static 'js/lib/calendar/zui.calendar.min.js' %}"></script>
+<script src="{% static 'js/lib/datetimepicker/datetimepicker.js' %}"></script>
+<script src="{% static 'js/models/noteModel.js' %}"></script>
+<script src="{% static 'js/pages/notebook.js' %}"></script>
+
+{% endblock %}

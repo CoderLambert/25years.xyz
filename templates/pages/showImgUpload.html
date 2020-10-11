@@ -1,0 +1,73 @@
+{% extends 'base/base.html' %}
+{% load static %}
+{% load mptt_tags %}
+{% block CustomCSS %}
+<style>
+    img {
+        border: 2px solid #eee;
+        margin:10px;
+        cursor:pointer;
+    }
+    .table td {
+        vertical-align: middle;
+    }
+</style>
+{% endblock %}
+{% block nav %}
+{% include 'component/nav.html' %}
+{% endblock %}
+
+{% block content %}
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-12 col-sm-12 col-xs-12">
+            <div class="table-responsive">
+
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th>图片名</th>
+                        <th>链接地址</th>
+                        <th>图片大小</th>
+                        <th>缩略图</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                        {% for image in images %}
+                            <tr>
+                                <td>
+                                    <strong>
+                                        {{image.img_url.name}}
+                                    </strong>
+                                </td>
+                                <td><a href="{{image.img_url.url }}">{{image.img_url.path }}</a> </td>
+                                <td>{{image.img_url.size}}</td>
+                                <td>
+                                    <a href="{{image.img_url.url }}" data-toggle="lightbox" data-group="image-group-1" data-caption="{{image.img_url.name}}">
+                                        <img class="lazy" src="/media/pictures/default_PoCrNF9.jpg" data-src="{{image.img_url.url }}" width="150px" height="150px"  class="img-rounded" alt="{{image.img_url.name}}" >
+                                    </a>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+
+{% block CustomJS %}
+<script src="https://cdn.jsdelivr.net/npm/lazyload@2.0.0-rc.2/lazyload.js"></script>
+<script>
+  $(function() {
+      $("img.lazy").lazyload({
+        effect: "fadeIn"
+      });
+  });
+</script>
+{% endblock %}
+
+</body>
+</html>

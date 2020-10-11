@@ -1,0 +1,42 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>
+        {% block title %} {{title}} {% endblock %}
+    </title>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1, shrink-to-fit=no" />
+    <meta name="generator" content="vscode">
+    <meta http-equiv="Cache-Control" content="no-transform">
+    <meta http-equiv="Cache-Control" content="no-siteapp">
+    <meta name="description" content="lambert 的个人技术学习网站，总结了前端、python、django、linux等技术学习内容">
+    <meta property="author" content="lambert">
+    <meta property="keywords" content="javascript,html,css,vue,python,django,ubuntu,linux">
+    <meta http-equiv="windows-target" content="_top">
+    <meta http-equiv="page-enter" content="revealtrans(duration=3, transition=21)">
+    <link rel="canonical" href="https://25years.xyz/">
+
+    {% block header %} {% endblock %}
+
+    <link rel="stylesheet" href="{% static 'css/zui.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/zui-theme.css' %}">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+
+    {% block CustomCSS %} {% endblock %}
+</head>
+
+<body>
+    <main role="main" id="main" class="site-content"></main>
+    <script data-main="{% static  'app/main' %}"  src="{% static 'js/backbone_plugin/require.js' %}"></script>
+    <script>
+        localStorage.setItem('user','{{ request.user }}')
+    </script>
+</body>
+
+</html>
+
+
+

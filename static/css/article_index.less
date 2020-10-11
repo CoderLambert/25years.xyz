@@ -1,0 +1,92 @@
+.article-title {
+    text-align: center;
+}
+.article-total {
+    color: #212121;
+    strong {
+        color: skyblue;
+        font-size: 1.5em;
+        display: inline-block;
+    }
+}
+
+.article-abstract {
+    font-size: 1.2em;
+    text-indent:2em;
+    line-height: 1.8em;
+    background: #E8ECEF;
+    padding: 20px;
+    overflow: hidden;
+    // letter-spacing: 0.08em;
+    &&::after {
+        content: '...';
+        display: inline;
+    }
+}
+
+.abstract-content {
+    &::after {
+        content: '...';
+    }
+}
+.item-meta {
+    // display: flex;
+    // flex-wrap: wrap;/*溢出则换行*/
+    margin-left: 20px;
+    span {
+        // margin-right: 20px;
+    }
+    .item-section {
+        margin: 2px 0;
+    }
+}
+
+.item {
+
+    -webkit-transition: all 1.5s ease-in-out 1s;
+    -o-transition: all 1.5s ease-in-out 1s;
+    -moz-transition: all 1.5s ease-in-out 1s;
+    transition: all 1.5s ease-in-out 1s;
+
+    .item-opration {
+        display: none;
+    }
+    &:hover {
+        opacity: 1;
+        .item-opration {
+            display: block;
+        }
+        .item-title {
+            // transform: scale(1.2);
+            // font-size: 2em;
+
+            .article-title {
+                color: #f0932b;
+                // &:hover{
+                //     // color: #f0932b;
+                //     text-decoration: none;
+                // }
+            }
+        }
+        outline: 3px solid #6ab04c;
+        cursor: pointer;
+    }
+
+    .item-title {
+        line-height: 2em;
+        // text-align: center;
+        a {
+            color: #212121;
+        }
+    }
+
+    .category-link:hover {
+        background: skyblue;
+        transform: scale(1.2);
+        cursor: pointer;
+    }
+}
+
+.article-public-box  label {
+    width: 6em;
+}

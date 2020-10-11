@@ -1,0 +1,24 @@
+  <!-- 文章底部 -->
+  <footer>
+    <ul class="pager pager-justify">
+      {% if prev_article %}
+        <li class="previous">
+          <a href="{{ prev_article.get_absolute_url }}">
+            <i class="icon-arrow-left"></i>
+              {{ prev_article.title }}
+          </a>
+        </li>
+      {% endif %}
+
+      {% if next_article %}
+        <li class="next">
+          <a href="{{ next_article.get_absolute_url }}">
+            <i class="icon-arrow-right">
+              {{ next_article.title }}
+            </i>
+          </a>
+        </li>
+      {% endif %}
+
+    </ul>
+  </footer>

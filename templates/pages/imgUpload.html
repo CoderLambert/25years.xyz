@@ -1,0 +1,42 @@
+{% extends 'base/base.html' %}
+{% load static %}
+{% load mptt_tags %}
+{% block CustomCSS %}
+<style>
+    img {
+        border: 2px solid #eee;
+        margin:10px;
+        cursor:pointer;
+    }
+    .table td {
+        vertical-align: middle;
+    }
+</style>
+{% endblock %}
+{% block nav %}
+{% include 'component/nav.html' %}
+{% endblock %}
+
+{% block content %}
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-12 col-sm-12 col-xs-12 main-content">
+            <form action="." method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                    {{ form.as_p }}
+                <input type="submit" value="上传">
+            </form>
+
+        </div>
+    </div>
+
+</div>
+{% endblock %}
+
+
+{% block CustomJS %}
+
+{% endblock %}
+
+</body>
+</html>

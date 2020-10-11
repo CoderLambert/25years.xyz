@@ -1,0 +1,57 @@
+<article class="article">
+  <!-- 文章头部 -->
+  <header>
+
+    <h1>{{ article.title }} </h1>
+    <!-- 文章属性列表 -->
+    <dl class="dl-inline pull-right">
+      <dt>作者：</dt>
+      <dd>
+        {{ article.author.username}}
+      </dd>
+      
+      <dt>发表时间：</dt>
+      <dd>
+        {{ article.created_time}}
+      </dd>
+      <dd>
+        <i class="icon-eye-open"></i> {{ article.views }}       
+      </dd>
+    </dl>
+    <dl class="dl-inline">
+      <dt>分类：</dt>
+      <dd>
+        {% for tag in categorys %}
+          <span class="label label-info">{{ tag.name }}</span>
+        {% endfor %}
+      </dd>
+    </dl>
+
+    <!-- <div class="abstract">
+      <p class="abstract-content">
+        {{ article.abstract | safe }}
+      </p>
+    </div> -->
+  </header>
+  <!-- 文章正文部分 -->
+  <section class="content" id="post">
+    <!--    直接显示 不需要 html 转义 等价于 过滤器 safe-->
+
+    {%  if article.editor == 'rich' %}
+      {% autoescape off %}
+        {{ article.content}}
+      {% endautoescape %}
+      {% else %}
+        {% autoescape off %}
+
+        <div id="test-editormd-view">
+            <textarea style="display:none;" id="markdown_content">{{ article.content | safe}}</textarea>               
+        </div>
+
+        {% endautoescape %}
+    {% endif %}
+
+  </section>
+
+  {% include 'pages/article_detail/article_footer.html' %}
+</article>

@@ -1,0 +1,91 @@
+<!--
+@author: Lambert
+@time: 2020/06/02
+@file: login.html
+@contact: l156486648@163.com
+@site: blog.25years.xyz
+-->
+{% extends 'base/base.html' %}
+{% load static %}
+{% block CustomCSS %} 
+    {% if article.editor == "rich" %}
+        <link rel="stylesheet" href="{% static 'css/prism.css' %}">
+
+    {%else%}
+        <link rel="stylesheet" href="{% static 'vendor/bower_components/editor_md/css/editormd.css' %}" />
+    {% endif %}
+
+{% endblock %}
+
+{% block nav %}
+{% include 'component/nav.html' %}
+{% endblock %}
+
+
+{% block content %}
+<div class="container-fluid">
+    <div class="row main">
+
+        <div class="col-md-3 col-sm-12 col-xs-12 left-side">
+            {% include 'pages/article_detail/right_side.html' %}
+        </div>
+
+        <div class="col-md-9 col-sm-12 col-xs-12 main-content">
+            {% include 'pages/article_detail/article_post.html' %}
+        </div>
+
+    </div>
+</div>
+
+{% include 'pages/article_detail/article_option.html' %}
+{% endblock %}
+
+
+{% block CustomJS %}
+<script>
+var editor_type = "{{ article.editor |safe }}";
+console.log("editor_type");
+
+console.log(editor_type);
+
+</script>
+<script src="{% static 'js/side_options.js' %}"></script>
+
+{% if article.editor == "rich" %}
+    <script src="{% static 'js/lib/toc/jquery.toc.js' %}"></script>
+    <script src="{% static 'js/prism.js' %}"></script>
+    <script>
+        $('#toc').initTOC(side_option.toc_options);
+    </script>
+    {%else%}
+        <script src="{% static 'vendor/bower_components/editor_md/lib/marked.min.js' %}"></script>
+        <script src="{% static 'vendor/bower_components/editor_md/lib/prettify.min.js' %}"></script>
+
+        <script src="{% static 'vendor/bower_components/editor_md/editormd.js' %}"></script>
+        <script>
+
+            var testEditormdView, testEditormdView2;
+                                    
+            testEditormdView = editormd.markdownToHTML("test-editormd-view", {
+
+                markdown        : $("#markdown_content").text(),
+                htmlDecode      : true,       // 开启 HTML 标签解析，为了安全性，默认不开启
+                // htmlDecode      : "style,script,iframe",  // you can filter tags decode
+                //toc             : false,
+                tocm            : true,    // Using [TOCM]
+                tocContainer    : "#markdown_toc", // 自定义 ToC 容器层
+
+                //tocContainer    : "#custom-toc-container", // 自定义 ToC 容器层
+                taskList        : true,
+                // tex             : true,  // 默认不解析
+                // flowChart       : true,  // 默认不解析
+                // sequenceDiagram : true,  // 默认不解析
+                editorTheme: "dark",//编辑器的主题颜色
+                theme: "dark",//顶部的主题
+                previewTheme: "dark"//显示的主题
+
+            });
+        </script>
+{% endif %}
+
+{% endblock %}

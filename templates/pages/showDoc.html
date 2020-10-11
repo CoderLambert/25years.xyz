@@ -1,0 +1,64 @@
+{% extends 'base/base.html' %}
+{% load static %}
+{% load mptt_tags %}
+{% block CustomCSS %}
+<style>
+    img {
+        border: 2px solid #eee;
+        margin:10px;
+        cursor:pointer;
+    }
+    .table td {
+        vertical-align: middle;
+    }
+</style>
+{% endblock %}
+{% block nav %}
+{% include 'component/nav.html' %}
+{% endblock %}
+
+{% block content %}
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-12 col-sm-12 col-xs-12">
+            <div class="table-responsive">
+
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th>文档名称</th>
+                        <th>地址</th>
+                        <th>大小</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                        {% for doc in docs %}
+                            <tr>
+                                <td>
+                                    <strong>
+                                        {{doc.doc_url.name}}
+                                    </strong>
+                                </td>
+                                <td><a href="{{doc.doc_url.url }}">{{doc.doc_url.url }}</a> </td>
+                                <td>{{doc.doc_url.size}}</td>
+                                <td>
+                                    <a href="{{doc.doc_url.url }}" data-toggle="lightbox" data-group="doc-group-1" data-caption="{{doc.doc_url.name}}">
+                                    </a>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+
+{% block CustomJS %}
+
+{% endblock %}
+
+</body>
+</html>

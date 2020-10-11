@@ -1,0 +1,17 @@
+.category-itme {
+  display: inline-flex;
+}
+.category-itme .category-title {
+  margin-left: 5px;
+}
+#category_toggle {
+  cursor: pointer;
+  color: skyblue;
+}
+.check-category-box {
+  display: flex;
+  justify-content: flex-end;
+}
+.check-category-box div:nth-child(2) {
+  margin-left: 10px;
+}

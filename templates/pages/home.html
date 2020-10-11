@@ -1,0 +1,248 @@
+<!--
+@author: Lambert
+@time: 2020/06/02
+@file: home.html
+@contact: l156486648@163.com
+@site: blog.25years.xyz
+-->
+{% extends 'base/base.html' %}
+{% load static %}
+{% load mptt_tags %}
+{% block title %} lambert 的个人网站 {% endblock %}
+
+{% block nav %}
+{% include 'component/nav.html' %}
+{% endblock %}
+{% block CustomCSS %}
+<link rel="stylesheet" href="{% static 'js/lib/chosen/chosen.css' %}" />
+{% endblock %}
+
+{% block content %}
+
+
+<div class="container-fluid ">
+    <div class="row main">
+        <div class="col-md-9 col-sm-12 col-xs-12 main-content">
+            <div class="list">
+                <header>
+                    <h3 class="article-total"><i class="icon icon-file-text-o icon-2x"></i> 共 <strong class="animate__animated animate__bounce">{{ page_obj.paginator.count }}</strong> 篇文章</h3>
+                </header>
+                <div class="items">
+
+                    <dl class="dl-inline">
+
+                        {% for article in articles %}
+                        <div class="item  article-info" data-href="{{ article.get_absolute_url }}">
+                            <div class="item-heading">
+                                <div class="item-heading">
+                                    {% if request.user == article.author %}
+                                    <div class="item-opration  pull-right">
+                                        <a href="article/update/{{ article.id}}" target="_blank" class="btn btn-info " type="button">编辑</a>
+
+                                        <a href="article/{{ article.id}}/article/delete" class="btn btn-danger "
+                                            type="button">删除</a>
+                                    </div>
+                                    {% endif %}
+
+                                    <h2 class="item-title">
+                                        <span class="label label-badge label-info article-format" title="{% if article.editor == 'md' %} Markdown 格式{% else %}富文本格式{% endif %}">
+                                            {% if article.editor == 'md' %}
+                                            M
+                                            {% else %}
+                                            R
+                                            {% endif %}
+                                        </span>
+
+                                        {% if article.original == 'no' %}
+                                        <span class="label label-badge label-warning">
+                                            <a  class="article-orginal"  href="{{article.link_address}}" target="_blank" title="该文章从其它网站收集整理，点击跳转到原网站阅读">
+                                                转
+                                            </a>
+                                        </span>
+                                        {% else %}
+                                        <span class="label  label-badge label-success" title="作者原创的文章">
+                                            原
+                                        </span>
+                                        {% endif %}
+
+                                        <a href="{{ article.get_absolute_url }}" target="_blank" class="article-title">
+                                            {{ article.title }}
+                                        </a>
+
+
+                                        <small style="margin-left: 20px;">
+                                            <strong>
+                                                {% if request.user == article.author %}
+
+                                                {{article.author}}
+
+                                                {% else %}
+                                                匿名
+                                                {% endif %}
+                                            </strong>
+
+                                            发布于 {{ article.created_time | date:"Y-m-d H:i:s" }}
+                                        </small>
+                                        <small style="margin-left: 20px;">
+                                            <i class="icon-eye-open"></i> {{ article.views }}
+                                        </small>
+                                    </h2>
+                                </div>
+                            </div>
+
+                            <div class="item-content">
+                                <p class="article-abstract">
+                                    {{ article.abstract |safe}}
+                                </p>
+                            </div>
+
+                            <dl class="">
+                                <span class="label  label-info">分类：</span>
+
+                                <dd>
+                                    {% for tag in article.get_categorys %}
+                                    <span data-href="{% url 'index' %}?category_id={{tag.id}}"  class="label label-success category-link">{{ tag.name }}</span>
+                                    {% endfor %}
+                                </dd>
+                                
+                            </dl>
+                        </div>
+                        {% endfor %}
+                    </dl>
+                </div>
+
+            </div>
+
+            <div style="margin: 0 20px;">
+                <ul class="pager pager-loose">
+                    {% if page_obj.has_previous %}
+                    <li><a
+                            href="?page={{ page_obj.previous_page_number }}{%if category_id %}&category_id={{ category_id}}{% endif %}{%if keyword %}&keyword={{ keyword}}{% endif %}">上一页</a>
+                    </li>
+                    {% endif %}
+
+                    {% for page_info in page_obj.paginator.page_range %}
+                    <li class="{% if page_obj.number == page_info %} active {% else %}  {%endif%} ">
+                        <a
+                            href="?page={{ page_info }}{%if category_id %}&category_id={{ category_id}}{% endif %}{%if keyword %}&keyword={{ keyword}}{% endif %} ">{{ page_info }}</a>
+                    </li>
+                    {% endfor %}
+                    {% if page_obj.has_next %}
+                    <li><a
+                            href="?page={{ page_obj.next_page_number }}{%if category_id %}&category_id={{ category_id}}{% endif %}{%if keyword %}&keyword={{ keyword}}{% endif %}">下一页</a>
+                    </li>
+                    {% endif %}
+                </ul>
+            </div>
+
+        </div>
+
+        <div class="col-md-3 col-sm-12 col-xs-12 right-side">
+            {% include 'component/home_right_side.html' %}
+        </div>
+
+        <div class="option-box">
+            <div class="option-scroll-top">
+                <i class="icon icon-angle-up icon-3x"></i>
+            </div>
+
+            <div class="option-scroll-bottom">
+                <i class="icon icon-angle-down icon-3x"></i>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<footer>
+        <div class="archival-info">   
+            <span><em>lambert</em> 的个人网站   ©Copyright 2020</span>
+            <a href="https://beian.miit.gov.cn/">苏ICP备18012622号-1</a> 
+            <span>
+                本网站运行在 <a href="https://cloud.tencent.com/">腾讯云</a>上
+            </span>
+        </div>  
+    </div>
+</footer>
+
+{% endblock %}
+
+
+{% block CustomJS %}
+<script>
+    function doSearch() {
+        var query = new URLSearchParams(location.search);
+        query.set('keyword', $('#KeyWord').val());
+        query.set('page', 1);
+
+        window.location = window.location.pathname + '?' + query.toString();
+    }
+
+</script>
+
+<script src="{% static 'js/lib/chosen/chosen.js' %}"></script>
+
+<script src="{% static 'js/lib/toc/jquery.toc.js' %}"></script>
+<script src="{% static 'js/side_options.js' %}"></script>
+<script src="{% static 'js/utils.js' %}"></script>
+
+
+<script>
+(function ($) {
+    // $('#category_toggle').click()
+    $("#searchKeyWord").on('click', doSearch)
+    $("#KeyWord").on('keypress', function (event) {
+        if (event.keyCode == '13') {
+            doSearch();
+        }
+    })
+
+
+    $("#refresh_category").on('click', function () {
+        var $mptt_tag = $("#mptt_tag");
+        $mptt_tag.empty().html('<div style="margin:20px auto;text-align: center;color: skyblue;"><i class="icon icon-spin icon-refresh icon-3x"></i></div>');
+        var $btn = $(this);
+        $btn.button('loading');
+
+
+        $.get('/article/category', function (data, textStatus) {
+            $btn.button('reset').text('刷新');
+            $mptt_tag.html(data);
+            $('#CategoryTree').tree('toggle');
+        })
+    })
+
+    // $('#category_toggle').click();
+
+    $('#mptt_tag_select').chosen({
+        no_results_text: '没有找到',    // 当检索时没有找到匹配项时显示的提示文本
+        disable_search_threshold: 10, // 10 个以下的选择项则不显示检索框
+        search_contains: true,         // 从任意位置开始检索
+        single_backstroke_delete: true // 退格删除
+    });
+    
+    $('#mptt_tag_select').on('change', function(ev){
+        window.location.href = '\?category_id=' + ev.target.value;
+        return false;
+    });
+
+    $('.category-link').on('click', function(ev){
+        window.location.href = $(ev.target).data('href');
+        return false;
+    });
+
+    $('#category_toggle').click(function (e) {
+     var ele = $(this);
+     console.log(ele);
+     ele.toggleClass('icon-collapse-alt icon-expand-alt');
+     $('#CategoryTree').tree('toggle');
+})
+
+})(jQuery);
+
+
+
+</script>
+
+
+{% endblock %}

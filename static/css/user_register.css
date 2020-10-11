@@ -1,0 +1,16 @@
+#reg_form {
+  max-width: 460px;
+  padding: 0;
+  margin: 50px auto 0 auto;
+  color: white;
+}
+#reg_form.well {
+  background: #78c870;
+  border: 1px solid #78c870;
+  box-shadow: inset 0px 0px 5px #78b870 !important;
+}
+#reg_form h3 {
+  text-align: center;
+  margin: 0;
+  padding: 1em;
+}

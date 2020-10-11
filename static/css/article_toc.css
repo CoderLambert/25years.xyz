@@ -1,0 +1,62 @@
+#toc {
+  font-size: 1.6em;
+  background: #fff;
+  border: 2px solid #eee;
+  padding-left: 1em;
+  color: #717171;
+}
+#toc #toc-nav {
+  text-align: center;
+  color: skyblue;
+}
+#toc > ol,
+#toc > ul {
+  overflow: scroll;
+  max-height: calc(100vh - 150px);
+}
+#toc ol {
+  list-style-position: inside;
+  font-size: 90%;
+  list-style: none;
+}
+#toc ol li {
+  list-style-position: outside;
+  line-height: 2em;
+}
+#toc ol li a {
+  color: #717171;
+  text-decoration: none;
+  width: 100%;
+  padding: 5px 0;
+}
+#toc ol li a:hover {
+  color: #03b8cf;
+  width: 100%;
+}
+#toc ol li.active > a:first-of-type {
+  color: #03b8cf;
+}
+#toc .markdown-toc-list {
+  list-style: none;
+  list-style-position: inside;
+  overflow: scroll;
+  max-height: calc(100vh - 150px);
+}
+#toc .markdown-toc-list li {
+  list-style-position: outside;
+  line-height: 2em;
+}
+#toc .markdown-toc-list li a {
+  font-size: 90%;
+  color: #717171;
+  text-decoration: none;
+  width: 100%;
+  padding: 5px 0;
+}
+#toc .markdown-toc-list li a:hover {
+  color: #03b8cf;
+  width: 100%;
+}
+#toc .markdown-toc-list li.active > a:first-of-type {
+  color: #03b8cf;
+}

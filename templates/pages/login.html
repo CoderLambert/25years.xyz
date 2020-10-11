@@ -1,0 +1,69 @@
+<!--
+@author: Lambert
+@time: 2020/06/02
+@file: login.html
+@contact: l156486648@163.com
+@site: blog.25years.xyz
+-->
+{% extends 'base/base.html' %}
+{% load static %}
+
+{% block nav %}
+
+{% endblock %}
+
+
+{% block content %}
+
+
+<div class="container-fluid">
+	<div class="row-fluid">
+
+
+		<form class="form-horizontal well" id="reg_form" method="post" action="{% url 'login' %}">
+			{% csrf_token %}
+			<h3>登录</h3>
+
+			<div class="form-group">
+				<label for="id_username" class="col-sm-2 control-label">用户名</label>
+				<div class="col-sm-9">
+					<input type="text" class="form-control" id="id_username" name="username" placeholder="用户名" required autofocus>
+				</div>
+				{% ifnotequal 0 login.password.value %}
+					{{ login_form.password.value }}
+				{% endifnotequal %}
+			  </div>
+
+			  <div class="form-group">
+				<label for="id_password" class="col-sm-2 control-label">密码</label>
+				<div class="col-sm-9">
+					<input type="password" class="form-control" id="id_password" name="password" placeholder="密码" required>
+				</div>
+			  </div>
+			<div class="form-group">
+			  <div class="col-sm-offset-2 col-sm-9">
+				<div class="checkbox">
+				  <label>
+					<input type="checkbox" id="id_remember"> Remember me
+				  </label>
+				</div>
+			  </div>
+			</div>
+			<div class="form-group">
+			  <div class="col-sm-offset-2 col-sm-9">
+				<button type="submit" class="btn btn-default">Sign in</button>
+				<button type="reset" class="btn btn-default">Reset</button>
+			  </div>
+			</div>
+		  </form>
+	</div>
+</div>
+
+{% endblock %}
+
+
+{% block CustomJS %}
+<script>
+</script>
+
+{% endblock %}

@@ -1,0 +1,136 @@
+{% extends 'base/base.html' %}
+{% load static %}
+{% block CustomCSS %}
+<style>
+    .dot {
+        width: 10px;
+        height: 10px;
+        background: black;
+        display: inline-block;
+        border-radius: 50%;
+        vertical-align: baseline;
+    }
+    .change-video {
+        margin-left: 20px;
+        display: inline;
+    }
+    .change-video-left,.change-video-right {
+        border: 1px solid #ccc;
+        text-align: center;
+        margin-right:15px ;
+        width: 20px;
+    }
+    .change-video span:hover {
+        cursor: pointer;
+    }
+
+    .video-content {
+        position: relative;
+        height: 300px;
+        overflow: hidden;
+        margin-top: 30px;
+    }
+    .video-content-list {
+        position: absolute;
+        left: 0;
+        display: inline-block;
+    }
+    ul li {
+        list-style: none;
+        display: inline-block;
+    }
+    /* .video-content-box::before{
+        content: "<";
+    }
+
+    .video-content-box::after{
+        content: '<i class="icon icon-chevron-right"></i>';
+    } */
+</style>
+{% endblock %}
+
+{% block nav %}
+    {% include 'component/nav.html' %}
+{% endblock %}
+
+
+{% block content %}
+    <div class="container">
+        <div class="row">
+             <div class="col-md-12">
+
+                <div style="display: flex; justify-content: space-between;border-bottom: 1px solid #ddd;">
+                    <h2>动漫视频
+                        <span class="dot"></span>
+                        <span class="dot"></span>
+                        <section class="change-video">
+                            <span class="change-video-left">
+                                <i class="icon icon-chevron-left"></i>
+                            </span>
+                            <span class="change-video-right">
+                                <i class="icon icon-chevron-right"></i>
+                            </span>
+                        </section>
+                    </h2>
+                    <h2>
+                        更多视频 >>
+                    </h2>
+                </div>    
+            </div>
+        </div>
+        <div class="video-content">
+            <div  class="video-content-list">
+
+
+                <ul class="video-content-box">
+
+                    <li><img src="https://picsum.photos/200/300?randome=1" alt=""></li>
+                    <li><img src="https://picsum.photos/200/300?randome=2" alt=""></li>
+                    <li><img src="https://picsum.photos/200/300?grayscale" alt=""></li>
+                    <li><img src="https://picsum.photos/200/300?randome=3" alt=""></li>
+                    <li><img src="https://picsum.photos/200/300?randome=4" alt=""></li>
+
+                    <li><img src="https://picsum.photos/200/300?randome=5" alt=""></li>
+                    <li><img src="https://picsum.photos/200/300?grayscale" alt=""></li>
+                    <li><img src="https://picsum.photos/200/300?randome=6" alt=""></li>
+                    <li><img src="https://picsum.photos/200/300?randome=7" alt=""></li>
+                    <li><img src="https://picsum.photos/200/300?randome=8" alt=""></li>
+                    <li><img src="https://picsum.photos/200/300?randome=8" alt=""></li>
+                    <li><img src="https://picsum.photos/200/300?randome=9" alt=""></li>
+                </ul>
+            </div>  
+
+        </div>
+    </div>
+{% endblock %}
+
+
+{% block CustomJS %}
+<script>
+var $v = $('.video-content-list');
+var $v_width = $('.video-content').width();
+$('.change-video-left').on('click',function(){
+    console.log('left');
+    
+    // var target = (parseInt($v.css('left')) + $v_width);
+
+    // $v.animate({'left':target + 'px'  },300)
+    $v.animate({'left': "+="+$v_width  },300)
+
+    // $v.css('left')s
+})
+
+
+$('.change-video-right').on('click',function(){
+    console.log('right');
+    // var target = (parseInt($v.css('left')) - $v_width);
+    // $('.video-content-list').animate({'left':target + 'px'},300)
+    $('.video-content-list').animate({'left':"-="+$v_width},300)
+
+    
+})
+
+</script>
+
+
+{% endblock %}

@@ -1,0 +1,36 @@
+<!-- 导航菜单 -->
+<header class="header">
+    <nav class="navbar navbar-inverse" role="navigation">
+        <ul class="nav navbar-nav">
+            <li><a href="/"><%=locale.home%> </a></li>
+            <li ><a href="#fm"><%= locale.doc_management %></a></li>
+            <li><a href="#sw"><%= locale.sw_management %></a></li>
+            <li><a href="#pic"><%= locale.img_management %></a></li>
+
+        </ul>
+
+        <ul class="nav navbar-nav nav-operation">
+
+            <li>
+                <a id="page_refresh">
+                    <i class="icon icon-repeat"></i>
+                    <%=locale.page_refresh%> 
+                </a>
+            </li>
+
+            <li>
+                <a id="change_language"><i class="icon icon-exchange"></i>
+                    <%=locale.language_change%> 
+                    <span id="current_language_status"></span>
+                </a>
+            </li>
+
+
+        </ul>
+      </nav> 
+</header>
+
+<!-- 页面内容视图 -->
+<aside class="right-side" >
+
+</aside>
