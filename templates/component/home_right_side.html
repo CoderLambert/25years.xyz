@@ -1,61 +1,80 @@
 <!-- <div class="panel-group"> -->
+
+
   <div class="panel  animate__animated  animate__fadeIn">
 
     <div class="panel-heading recent-public">
-      最近发布
-  </div>
+        最近发布
+    </div>
     <div class="panel-body">
 
-      <div class="list-group article-hot">
-          {% for article in news %}
+        <div class="list-group article-hot">
+            {% for article in news %}
             <a href="{{ article.get_absolute_url}}" class="list-group-item">{{ article.title }}</a>
-          {% endfor %}
-      </div>
+            {% endfor %}
+        </div>
 
     </div>
 
-  </div>
-  <div class="panel  animate__animated  animate__fadeIn">
+</div>
+<div class="panel  animate__animated  animate__fadeIn">
     <div class="panel-heading category">
-          分类
-          <button class="btn btn-info pull-right" type="button" id="refresh_category" data-loading-text="正在加载...">
+        分类
+        <button class="btn btn-info pull-right" type="button" id="refresh_category" data-loading-text="正在加载...">
             刷新
-         </button>
-          <i class="icon icon-expand-alt icon-expand-size"  id="category_toggle"></i>
+        </button>
+        <i class="icon icon-expand-alt icon-expand-size" id="category_toggle"></i>
 
-  </div>
+    </div>
     <div class="panel-body" id="mptt_tag">
 
-      <select id="mptt_tag_select" data-placeholder="选择一个分类" class="chosen-select form-control" tabindex="2">
-        <option value=""></option>
+        <select id="mptt_tag_select" data-placeholder="选择一个分类" class="chosen-select form-control" tabindex="2">
+            <option value=""></option>
 
-        {% for node in nodes  %}
+            {% for node in nodes %}
             <option value="{{node.id}}">{{node.name}}</option>
-        {% endfor %}
-    </select>
+            {% endfor %}
+        </select>
 
-      {% load cache %}
-      {% cache 86400 sidebar %}
+        {% load cache %}
+        {% cache 86400 sidebar %}
         {% include 'pages/article_detail/category.html'%}
-      {% endcache %}
+        {% endcache %}
 
     </div>
 
-  </div>
-  <div class="panel  animate__animated  animate__fadeIn">
-    
+</div>
+<div class="panel  animate__animated  animate__fadeIn">
+
     <div class="panel-heading hot">
-      热门
-  </div>
+        热门
+    </div>
     <div class="panel-body">
 
-      <div class="list-group article-hot">
-          {% for article in hots %}
+        <div class="list-group article-hot">
+            {% for article in hots %}
             <a href="{{ article.get_absolute_url}}" class="list-group-item">{{ article.title }}</a>
-          {% endfor %}
-      </div>
+            {% endfor %}
+        </div>
     </div>
 
-  </div>
-  
+</div>
+
+<div class="panel  animate__animated  animate__fadeIn">
+
+    <div class="panel-heading side-private" style="background:black">
+        个人
+    </div>
+    <div class="panel-body">
+        <div class="list-group side-private">
+            <a href="https://github.com/CoderLambert?tab=repositories" target="_blank" class="list-group-item">个人 Git
+                代码仓库</a>
+            <a href="#" class="list-group-item">微信: L156486648 </a>
+            <a href="#" class="list-group-item">邮箱: L156486648@163.com </a>
+            <a href="https://github.com/CoderLambert/25years.xyz" target="_blank" class="list-group-item">本项目代码仓库</a>
+        </div>
+    </div>
+
+</div>
+
 <!-- </div> -->
